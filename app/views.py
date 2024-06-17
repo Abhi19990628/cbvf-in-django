@@ -3,8 +3,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Informations
-from .serializers import InformationsSerializer
+from .models import Informations,Student,Collages
+from .serializers import InformationsSerializer,StudentSerializer,CollagesSerializer
 
 class InformationList(APIView):
     def get(self,request):
@@ -48,6 +48,55 @@ class InformationDetail(APIView):
         information = self.get_object(pk)
         information.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    
+    
+    
+    
+
+#########________________Student apis__________________#############
+   #____________________________________________________________#
 
 
 
+class Studentinformation(APIView):
+    def get(self,request):
+        student=Student.objects.all()
+        serializer=StudentSerializer(student , many=True)
+        return Response(serializer.data)
+    
+    def post(self,request):
+        serializer=StudentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class StudentDetails(APIView):
+    def get_object(self, pk):
+        return get_object_or_404(Student, pk=pk)
+    
+    def get(self, request, pk):
+        student  = self.get_object(pk)
+        serializer = InformationsSerializer(student)
+        return Response(serializer.data)
+    
+#########_______________________collages________________________#############
+#___________________________________________________________________________#
+
+
+class collagesinformations(APIView):
+    def get(self, request):
+        collages=Collages.objects.all()
+        serializer=CollagesSerializer(collages , many=True)
+        return Response(serializer.data)
+    
+    def post(self,request):
+        serializer=CollagesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data ,status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+    

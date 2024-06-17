@@ -8,3 +8,21 @@ class Informations(models.Model):
     
     def __str__(self):
         return self.name
+
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+    roll = models.IntegerField()
+    des  = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.name
+    
+class Collages(models.Model):
+    name = models.CharField(max_length=120)
+    collage_no=models.IntegerField()
+    city=models.CharField(max_length=120)
+    iet_no=models.IntegerField(max_length=50)
+    
+     
+    def __str__(self):
+        return self.name
