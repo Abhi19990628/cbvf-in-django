@@ -44,7 +44,8 @@ class InformationDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk):
+
+   def delete(self, request, pk):
         information = self.get_object(pk)
         information.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -57,6 +58,7 @@ class InformationDetail(APIView):
 #########________________Student apis__________________#############
    #____________________________________________________________#
 
+<<<<<<< HEAD
 
 
 class Studentinformation(APIView):
@@ -100,3 +102,5 @@ class collagesinformations(APIView):
     
     
     
+=======
+>>>>>>> c35c5e9711ed068ff39ac206051d6f183edd439a
