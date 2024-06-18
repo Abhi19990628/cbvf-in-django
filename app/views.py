@@ -3,8 +3,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Informations,Student,Collages
-from .serializers import InformationsSerializer,StudentSerializer,CollagesSerializer
+from .models import Informations,Student,Collages,Teacher
+from .serializers import InformationsSerializer,StudentSerializer,CollagesSerializer,TeacherSerializer
 
 class InformationList(APIView):
     def get(self,request):
@@ -43,9 +43,8 @@ class InformationDetail(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-   def delete(self, request, pk):
+    
+    def delete(self, request, pk):
         information = self.get_object(pk)
         information.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -57,10 +56,7 @@ class InformationDetail(APIView):
 
 #########________________Student apis__________________#############
    #____________________________________________________________#
-
-<<<<<<< HEAD
-
-
+   
 class Studentinformation(APIView):
     def get(self,request):
         student=Student.objects.all()
@@ -101,6 +97,18 @@ class collagesinformations(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     
+
+#_____________________________TEACHERS_________________________________#
+
+class TeacherInformations(APIView):
+    def get(self,request):
+        teacher = Teacher.objects.all()
+        serializer = TeacherSerializer(teacher,many=True)
+        return Response(serializer.data)
     
-=======
->>>>>>> c35c5e9711ed068ff39ac206051d6f183edd439a
+    def post(self, request):
+        serializer = TeacherSerializer(data= request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data , status=status.HTTP_200_OK)
+        return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)            
