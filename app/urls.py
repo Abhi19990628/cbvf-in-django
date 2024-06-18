@@ -6,6 +6,9 @@ urlpatterns = [
     path('infos',Studentinformation.as_view(), name='Studentinfromation'),
     path('students/<int:pk>/', StudentDetails.as_view(), name='student-details'),
     path('infoc',collagesinformations.as_view(),name ='collagesinformations'),
+<<<<<<< HEAD
     path('infot', TeacherInformations.as_view(), name= 'teachersinformations')
+=======
+>>>>>>> 63a8c9595810e0489b4758ddb8d17b90d3936762
 
 ]
