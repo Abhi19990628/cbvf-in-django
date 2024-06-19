@@ -3,8 +3,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Informations,Student,Collages,Teacher
-from .serializers import InformationsSerializer,StudentSerializer,CollagesSerializer,TeacherSerializer
+from .models import Informations,Student,Collages,Teacher,principal
+from .serializers import InformationsSerializer,StudentSerializer,CollagesSerializer,TeacherSerializer,principalSerializer
 
 class InformationList(APIView):
     def get(self,request):
@@ -112,3 +112,20 @@ class TeacherInformations(APIView):
             serializer.save()
             return Response(serializer.data , status=status.HTTP_200_OK)
         return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)            
+    
+    
+    
+    
+    
+class principalinfromation(APIView):
+    def get(self , request ):
+        Principal = principal.objects.all()  
+        serializer = principalSerializer(Principal , many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = principalSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.error, status= status.HTTP_400_BAD_REQUEST)
