@@ -37,6 +37,15 @@ class Teacher(models.Model):
     
     def __str__(self):
         return self.name
+
+class principal(models.Model):
+    name=models.CharField(max_length=10)
+    class_room = models.IntegerField()
+    subject = models.CharField(max_length=20)
+    age = models.CharField(max_length=10)
     
+    
+    def __str__(self):
+        return self.name
     
     
