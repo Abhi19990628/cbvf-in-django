@@ -7,6 +7,8 @@ urlpatterns = [
     path('students/<int:pk>/', StudentDetails.as_view(), name='student-details'),
     path('infoc',collagesinformations.as_view(),name ='collagesinformations'),
     path('infot', TeacherInformations.as_view(), name= 'teachersinformations'),
+    path('infop', principalinfromation.as_view() ,name='informationabout principals'),
+    path('infot', TeacherInformations.as_view(), name= 'teachersinformations'),
     path('infop', principalinfromation.as_view() ,name='informationabout principals')
     
 
